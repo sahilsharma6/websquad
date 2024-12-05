@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import img1 from "../assets/image.png";
-const LandingPage = () => {
+// import img1 from ".../";
+const Hero = () => {
   const { scrollYProgress } = useScroll(); 
   const leftCircleY = useTransform(scrollYProgress, [0, 0.3], [150, -50]); 
   return (
@@ -40,7 +40,7 @@ const LandingPage = () => {
               className="absolute top-0 left-0 w-1/2 h-full bg-yellow-200 rounded-l-full"
             >
               
-              <img src={img1} alt="Image" className="w-full h-full object-cover rounded-l-full
+              <img src={''} alt="Image" className="w-full h-full object-cover rounded-l-full
               " />
             </motion.div>
 
@@ -53,4 +53,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default Hero;

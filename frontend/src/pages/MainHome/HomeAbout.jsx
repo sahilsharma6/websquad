@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import React from "react";
-import img1 from "../assets/image.png";
+// import img1 from "../assets/image.png";
 
-const Whyus = () => {
+const HomeAbout = () => {
   return (
     <div className="w-11/12 mx-auto flex flex-col md:flex-row items-center justify-evenly py-16 bg-gradient-to-r rounded-lg shadow-md">
       {/* Left side */}
@@ -36,7 +36,7 @@ const Whyus = () => {
       >
         <div className="bg-blue-900 rounded-lg p-4 text-center text-white shadow-lg">
           <img
-            src={img1}
+            src={"img1"}
             alt="Vision"
             className="mx-auto rounded-lg border-4 border-white max-w-full h-auto md:w-80"
           />
@@ -46,4 +46,4 @@ const Whyus = () => {
   );
 };
 
-export default Whyus;
+export default HomeAbout;

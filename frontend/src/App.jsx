@@ -1,16 +1,14 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import LandingPage from './components/HeroSection.jsx'
-import Services from './components/Services.jsx'
-import Whyus from './components/Whyus.jsx'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
     <>
-    <Navbar/>
-    <LandingPage/>
-    <Whyus/>
-    <Services/>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </>
   )
 }

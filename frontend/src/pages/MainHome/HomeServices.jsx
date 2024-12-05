@@ -69,7 +69,7 @@ const ServiceCard = ({ title, description, icon, index }) => {
   );
 };
 
-const Services = () => {
+const HomeServices = () => {
   return (
     <div className="items-center justify-items-center">
       <div className="bg-white py-12 w-11/12">
@@ -97,4 +97,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default HomeServices;

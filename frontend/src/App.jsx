@@ -1,8 +1,17 @@
 import React from 'react'
+import Navbar from './components/Navbar'
+import LandingPage from './components/HeroSection.jsx'
+import Services from './components/Services.jsx'
+import Whyus from './components/Whyus.jsx'
 
 const App = () => {
   return (
-    <div className='text-2xl '>App</div>
+    <>
+    <Navbar/>
+    <LandingPage/>
+    <Whyus/>
+    <Services/>
+    </>
   )
 }
 

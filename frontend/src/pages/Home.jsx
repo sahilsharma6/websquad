@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Hero from './MainHome/Hero'
-import HomeBlog from './MainHome/HomeBlog'
+// import HomeBlog from './MainHome/HomeBlog'
 import HomeTeams from './MainHome/HomeTeams'
 import HomeContact from './MainHome/HomeContact'
 import HomeServices from './MainHome/HomeServices'
@@ -32,11 +32,11 @@ const Home = () => {
             <HomeTeams />
         </section>
 
-        <section>
+        {/* <section>
             <HomeBlog />
-        </section>
+        </section> */}
 
-        <section>
+        <section id='contact'>
             <HomeContact />
         </section>
     </div>

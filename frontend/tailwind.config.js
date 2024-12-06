@@ -5,7 +5,21 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        '7xl': '7rem',
+        '8xl': '8rem',
+        '9xl': '9rem',
+        '10xl': '10rem',
+      },
+      colors: {
+        'primary': '#a8b3ab',
+        'secondary': '#0b0d0c',
+      },
+      rotate: {
+        '225': '225deg',
+      }
+    },
   },
   plugins: [],
 }

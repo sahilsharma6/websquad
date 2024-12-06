@@ -9,7 +9,7 @@ const Hero = () => {
       <section className="flex flex-col md:flex-row items-center justify-between px-8 py-16 w-11/12 max-w-screen-xl">
         {/* Text Section */}
         <div className="mb-10 md:mb-0">
-          <h1 className="text-6xl md:text-8xl font-extrabold leading-tight text-gray-900">
+          <h1 className="text-5xl md:text-8xl font-extrabold leading-tight text-gray-900">
             WE ARE{" "}
             <span className="text-green-500">
               {" "}

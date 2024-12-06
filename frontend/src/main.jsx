@@ -11,11 +11,13 @@ import About from './pages/RoutePages/About.jsx';
 import Contact from './pages/RoutePages/Contact.jsx';
 import Service from './pages/RoutePages/Service.jsx';
 import Teams from './pages/RoutePages/Teams.jsx';
-import Blogs from './pages/RoutePages/Blogs.jsx';
+// import Blogs from './pages/RoutePages/Blogs.jsx';
 import Portfolio from './pages/RoutePages/Portfolio.jsx';
 import NotFound from './components/NotFound.jsx';
-import Login from './pages/Auth/Login.jsx';
+
+
 import AuthLayout from './pages/Auth/AuthLayout.jsx';
+import Login from './pages/Auth/Login.jsx';
 import Register from './pages/Auth/Register.jsx';
 
 
@@ -45,10 +47,10 @@ const router = createBrowserRouter([
         path: "team",
         element: <Teams />,
       },
-      {
-        path: "blog",
-        element: <Blogs />,
-      },
+      // {
+      //   path: "blog",
+      //   element: <Blogs />,
+      // },
       {
         path: "portfolio",
         element: <Portfolio />,

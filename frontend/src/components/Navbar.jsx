@@ -10,7 +10,7 @@ const Navbar = () => {
         <li className="text-lg font-medium text-gray-700 hover:text-blue-500 transition duration-300 cursor-pointer">Portfolio</li>
         <li className="text-lg font-medium text-gray-700 hover:text-blue-500 transition duration-300 cursor-pointer">Home</li>
         <li className="text-lg font-medium text-gray-700 hover:text-blue-500 transition duration-300 cursor-pointer">Pages</li>
-        <li className="text-lg font-medium text-gray-700 hover:text-blue-500 transition duration-300 cursor-pointer">Shop</li>
+        <li className="text-lg font-medium text-gray-700 hover:text-blue-500 transition duration-300 cursor-pointer"> <a href="#contact">contact</a></li>
       </ul>
       <div className="text-gray-700 hover:text-blue-500 cursor-pointer">
         <i className="fa fa-search text-xl"></i>

@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 // import img1 from ".../";
 const Hero = () => {
   const { scrollYProgress } = useScroll(); 
-  const leftCircleY = useTransform(scrollYProgress, [0, 0.3], [150, -50]); 
+  const leftCircleY = useTransform(scrollYProgress, [0, 0.3], [150, -150]); 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <section className="flex flex-col md:flex-row items-center justify-between px-8 py-16 w-11/12 max-w-screen-xl">

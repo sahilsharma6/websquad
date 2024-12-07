@@ -1,5 +1,5 @@
+import { Menu } from "lucide-react";
 import React, { useState } from "react";
-import { FiAlignJustify } from "react-icons/fi";
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -37,7 +37,7 @@ const Navbar = () => {
           onClick={toggleMobileMenu}
           className="text-gray-700 hover:text-blue-500 cursor-pointer focus:outline-none"
         >
-          <i className="fa fa-bars text-2xl"><FiAlignJustify /></i>
+          <i className="fa fa-bars text-2xl"><Menu /></i>
         </button>
       </div>
 

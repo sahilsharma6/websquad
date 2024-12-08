@@ -7,6 +7,7 @@ import AnimatedCursor from "react-animated-cursor";
 
 // Smooth scroll package
 import { Link, animateScroll as scroll } from "react-scroll";
+import ScrollToTopButton from './components/ScrollToTopButton'
 
 const App = () => {
   // Implementing smooth scroll
@@ -49,6 +50,7 @@ const App = () => {
       </main>
       <Footer />
       <SubFooter />
+      <ScrollToTopButton />
     </>
   );
 };

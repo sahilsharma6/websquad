@@ -7,37 +7,37 @@ const services = [
     title: "Graphic Design",
     description: "Transform your brand with visually stunning and strategic design solutions that captivate and communicate.",
     icon: "🎨",
-    color: "from-pink-500 to-rose-500"
+    color: "from-gray-700 to-gray-900"
   },
   {
     title: "Digital Products",
     description: "Innovative digital experiences that blend cutting-edge technology with intuitive user interfaces.",
     icon: "✨",
-    color: "from-indigo-500 to-purple-500"
+    color: "from-gray-600 to-gray-800"
   },
   {
     title: "Social Marketing",
     description: "Amplify your brand's voice and connect with your audience through data-driven social media strategies.",
     icon: "🧑‍🤝‍🧑",
-    color: "from-blue-500 to-cyan-500"
+    color: "from-gray-500 to-gray-700"
   },
   {
     title: "Brand Strategy",
     description: "Craft a compelling brand narrative that resonates with your target audience and drives business growth.",
     icon: "🏛️",
-    color: "from-green-500 to-emerald-500"
+    color: "from-gray-600 to-gray-800"
   },
   {
     title: "Product Development",
     description: "Turn innovative ideas into scalable digital solutions with our comprehensive product development approach.",
     icon: "📈",
-    color: "from-orange-500 to-amber-500"
+    color: "from-gray-500 to-gray-700"
   },
   {
     title: "Consulting",
     description: "Strategic insights and expert guidance to navigate complex business challenges and unlock potential.",
     icon: "🔵",
-    color: "from-teal-500 to-sky-500"
+    color: "from-gray-600 to-gray-900"
   },
 ];
 
@@ -60,7 +60,7 @@ const ServiceCard = ({ title, description, icon, color, index }) => {
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
         whileHover={{ scale: 1.05 }}
-        className="relative w-full max-w-sm bg-white shadow-2xl rounded-2xl overflow-hidden group"
+        className="relative w-full max-w-sm bg-gray-800 shadow-2xl rounded-2xl overflow-hidden group"
       >
         {/* Gradient Background */}
         <div 
@@ -74,31 +74,33 @@ const ServiceCard = ({ title, description, icon, color, index }) => {
               scale: isHovered ? 1.1 : 1
             }}
             transition={{ duration: 0.3 }}
-            className="text-6xl mb-4 text-center"
+            className="text-6xl mb-4 text-center text-gray-300"
           >
             {icon}
           </motion.div>
 
-          <h3 className="text-2xl font-bold mb-3 text-gray-800 text-center">
+          <h3 className="text-2xl font-bold mb-3 text-gray-200 text-center">
             {title}
           </h3>
 
-          <p className="text-gray-600 mb-6 text-center min-h-[100px] line-clamp-4">
+          <p className="text-gray-400 mb-6 text-center min-h-[100px] line-clamp-4">
             {description}
           </p>
 
+          {/* Updated Button */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={`w-full py-3 rounded-lg text-white font-semibold 
-              bg-gradient-to-br ${color} 
+            className={`w-full py-3 rounded-lg font-semibold 
+              text-gray-800 bg-white 
+              border border-gray-300 
               flex items-center justify-center 
               space-x-2 
               shadow-lg hover:shadow-xl 
               transition-all duration-300`}
           >
             <span>Learn More</span>
-            <FaArrowRight className="ml-2" />
+            <FaArrowRight className="ml-2 text-gray-800" />
           </motion.button>
         </div>
       </motion.div>
@@ -106,19 +108,20 @@ const ServiceCard = ({ title, description, icon, color, index }) => {
   );
 };
 
+
 const HomeServices = () => {
   return (
-    <div className="bg-gray-50 py-16 px-4">
+    <div className="bg-gray-900 py-16 px-4">
       <motion.div 
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         className="container mx-auto text-center mb-12"
       >
-        <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-gray-300 mb-4">
+        <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-gray-400 mb-4">
           Our Services
         </h2>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="text-xl text-gray-400 max-w-2xl mx-auto">
           Empowering businesses through innovative solutions, strategic insights, and transformative digital experiences.
         </p>
       </motion.div>

@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  scroll-behavior: smooth;
-}
+/* @import 'locomotive-scroll/dist/locomotive-scroll.css'; */
+
+
 
 
 ::-webkit-scrollbar {

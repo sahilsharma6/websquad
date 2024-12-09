@@ -9,6 +9,8 @@ import HomePortfolio from './MainHome/HomePortfolio'
 import HomeAbout from './MainHome/HomeAbout'
 import Banner1 from '../components/Banners/Banner1'
 import Banner2 from '../components/Banners/Banner2'
+import Banner3 from '../components/Banners/Banner3'
+import Banner4 from '../components/Banners/Banner4'
 
 
 
@@ -22,6 +24,8 @@ const Home = () => {
 
                 <Banner1 />
 
+                <Banner3 />
+                
                 <section>
                     <HomeAbout />
                 </section>
@@ -33,6 +37,8 @@ const Home = () => {
                 <section>
                     <HomePortfolio />
                 </section>
+
+                <Banner4 />
 
                 <div className=''>
                     <Banner2 />

@@ -63,7 +63,7 @@ const Banner2 = () => {
   return (
     <div 
       ref={bannerRef}
-      className="relative min-h-[50vh] flex flex-col justify-center items-center overflow-hidden px-4 sm:px-6 lg:px-8"
+      className="relative min-h-[50vh] py-10 flex flex-col justify-center items-center overflow-hidden px-4 sm:px-6 lg:px-8"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 to-primary/20 z-0" />
       

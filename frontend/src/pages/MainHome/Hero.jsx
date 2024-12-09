@@ -4,7 +4,7 @@ import { ChevronDown, ArrowRight } from "lucide-react";
 
 const Hero = () => {
   const { scrollYProgress } = useScroll();
-  const leftCircleY = useTransform(scrollYProgress, [0, 0.3], [150, -150]);
+  const leftCircleY = useTransform(scrollYProgress, [0, 0.2], [150, -150]);
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center overflow-hidden pt-20">
@@ -169,9 +169,9 @@ const Hero = () => {
         }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
       >
-        <div className="w-16 h-16 bg-white/30 backdrop-blur-lg rounded-full shadow-xl flex items-center justify-center">
+        {/* <div className="w-16 h-16 bg-white/30 backdrop-blur-lg rounded-full shadow-xl flex items-center justify-center">
           <ChevronDown className="w-8 h-8 text-purple-600" />
-        </div>
+        </div> */}
       </motion.div>
     </div>
   );

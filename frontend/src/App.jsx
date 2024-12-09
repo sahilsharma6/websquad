@@ -1,25 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SubFooter from './components/SubFooter';
+import ScrollToTopButton from './components/ScrollToTopButton';
 import AnimatedCursor from "react-animated-cursor";
-
-// Smooth scroll package
-import { Link, animateScroll as scroll } from "react-scroll";
-import ScrollToTopButton from './components/ScrollToTopButton'
+import SmoothScrollComponent from './components/SmoothScrollComponent';// Import the new component
 
 const App = () => {
-  // Implementing smooth scroll
-  useEffect(() => {
-    document.documentElement.style.scrollBehavior = 'smooth';
-    return () => {
-      document.documentElement.style.scrollBehavior = 'auto';
-    };
-  }, []);
-
   return (
-    <>
+    <SmoothScrollComponent>
       {/* Animated Cursor */}
       <AnimatedCursor
         innerSize={8}
@@ -51,7 +41,7 @@ const App = () => {
       <Footer />
       <SubFooter />
       <ScrollToTopButton />
-    </>
+    </SmoothScrollComponent>
   );
 };
 

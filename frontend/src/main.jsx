@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
+import { AnimatePresence } from 'framer-motion';
 
 import App from './App.jsx'
 
@@ -79,7 +80,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* <AuthProvider> */}
+    <AnimatePresence mode="wait">
       <RouterProvider router={router} />
+    </AnimatePresence>
       {/* <Toaster /> */}
     {/* </AuthProvider> */}
   </StrictMode>

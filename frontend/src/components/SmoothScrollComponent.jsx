@@ -1,78 +1,44 @@
 import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// Register ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
+import LocomotiveScroll from 'locomotive-scroll';
+import 'locomotive-scroll/dist/locomotive-scroll.css';
 
 const SmoothScrollComponent = ({ children }) => {
-  const contentRef = useRef(null);
+  const scrollRef = useRef(null);
+  const locomotiveScrollRef = useRef(null);
 
   useEffect(() => {
-    // Prevent multiple initializations
-    const content = contentRef.current;
-    if (!content) return;
-
-    // Smooth scroll setup
-    const smoothScroll = () => {
-      // Create a smooth scroll wrapper
-      gsap.set(content, { 
-        y: -window.pageYOffset 
+    if (scrollRef.current) {
+      locomotiveScrollRef.current = new LocomotiveScroll({
+        el: scrollRef.current,
+        smooth: true,
+        lerp: 0.001, // Lower value makes scrolling slower and smoother
+        multiplier: 0.8, // Reduce scroll speed
+        direction: 'vertical',
+        smartphone: {
+          smooth: true,
+          lerp: 0.07,
+          multiplier: 0.9
+        },
+        tablet: {
+          smooth: true,
+          lerp: 0.06,
+          multiplier: 0.85
+        },
+        // Optional: add easing for even smoother feel
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
       });
+    }
 
-      // Smooth scrolling listener
-      const handleScroll = () => {
-        gsap.to(content, {
-          y: -window.pageYOffset,
-          duration: 0.5,
-          ease: 'power2.out'
-        });
-      };
-
-      // Add scroll event listener
-      window.addEventListener('scroll', handleScroll);
-
-      // ScrollTrigger setup for smooth scrolling
-      ScrollTrigger.create({
-        trigger: document.body,
-        start: 'top top',
-        end: 'bottom bottom',
-        onUpdate: (self) => {
-          // Optional: Add custom scroll behavior
-          gsap.to(content, {
-            y: -window.pageYOffset,
-            duration: 0.5,
-            ease: 'power2.out'
-          });
-        }
-      });
-
-      // Cleanup function
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-        ScrollTrigger.getAll().forEach(t => t.kill());
-      };
-    };
-
-    // Initialize smooth scroll
-    const cleanup = smoothScroll();
-
-    // Return cleanup function
+    // Cleanup on unmount
     return () => {
-      if (cleanup) cleanup();
+      if (locomotiveScrollRef.current) {
+        locomotiveScrollRef.current.destroy();
+      }
     };
   }, []);
 
   return (
-    <div 
-      ref={contentRef} 
-      style={{ 
-        position: 'fixed', 
-        width: '100%', 
-        top: 0, 
-        left: 0 
-      }}
-    >
+    <div ref={scrollRef} data-scroll-container>
       {children}
     </div>
   );

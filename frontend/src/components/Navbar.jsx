@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Logo from './navbarComponents/Logo';
 import NavLink from './navbarComponents/NavLink';
 import Dropdown from './navbarComponents/Dropdown';
+import { AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);

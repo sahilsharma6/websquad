@@ -81,7 +81,7 @@ const Banner3 = () => {
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <WaveBackground 
                     color1="#ddede1" 
-                    color2="#a5b0a8"
+                    color2=""
                     className="w-full h-full" 
                 />
             </div>

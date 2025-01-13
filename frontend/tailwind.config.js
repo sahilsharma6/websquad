@@ -15,9 +15,20 @@ export default {
       colors: {
         'primary': '#a8b3ab',
         'secondary': '#0b0d0c',
+        'navlinks' : '#58615b',
       },
       rotate: {
         '225': '225deg',
+      },
+      keyframes: {
+        'wave-alternate': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' }
+        }
+      },
+      animation: {
+        'wave-alternate': 'wave-alternate 4s ease-in-out infinite'
       }
     },
   },

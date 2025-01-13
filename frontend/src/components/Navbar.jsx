@@ -1,211 +1,146 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { NavLink } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import { Menu, X, Search, Globe, Code, Briefcase, LayoutGrid, Cloud, MessagesSquare } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import Logo from './navbarComponents/Logo';
+import NavLink from './navbarComponents/NavLink';
+import Dropdown from './navbarComponents/Dropdown';
+import { AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen((prev) => !prev);
-  };
+  const isHomePage = location.pathname === '/' || location.pathname === '/home';
 
-  const toggleDropdown = (index) => {
-    setActiveDropdown(activeDropdown === index ? null : index);
-  };
-
-  const mobileMenuVariants = {
-    hidden: { opacity: 0, y: -20, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1 },
-    exit: { opacity: 0, y: -20, scale: 0.95 },
-  };
-
-  const menuItemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: (custom) => ({
-      opacity: 1,
-      x: 0,
-      transition: { delay: custom * 0.1 },
-    }),
-    exit: { opacity: 0, x: -20 },
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const menuItems = [
-    { label: "Home", path: "/", dropdown: false },
+    { label: 'Home', path: '/' },
     {
-      label: "Demo",
-      path: "/demo",
+      label: 'Projects',
       dropdown: true,
-      subItems: [
-        { label: "Web Design", path: "/demo/web-design" },
-        { label: "Mobile App", path: "/demo/mobile-app" },
-        { label: "UI/UX", path: "/demo/ui-ux" },
+      items: [
+        { label: 'Web Development', path: '/projects/web-development', icon: Globe },
+        { label: 'Mobile Apps', path: '/projects/mobile-apps', icon: Code },
+        { label: 'UI/UX Design', path: '/projects/ui-ux-design', icon: Briefcase },
       ],
     },
     {
-      label: "Portfolio",
-      path: "/portfolio",
+      label: 'Services',
       dropdown: true,
-      subItems: [
-        { label: "Graphic Design", path: "/portfolio/graphic-design" },
-        { label: "Web Development", path: "/portfolio/web-development" },
-        { label: "Branding", path: "/portfolio/branding" },
+      items: [
+        { label: 'Custom Software', path: '/services/custom-software', icon: LayoutGrid },
+        { label: 'Cloud Solutions', path: '/services/cloud-solutions', icon: Cloud },
+        { label: 'IT Consulting', path: '/services/it-consulting', icon: MessagesSquare },
       ],
     },
-    {
-      label: "Pages",
-      path: "/pages",
-      dropdown: true,
-      subItems: [
-        { label: "About Us", path: "/pages/about" },
-        { label: "Services", path: "/pages/services" },
-        { label: "Contact", path: "/pages/contact" },
-      ],
-    },
-    { label: "Shop", path: "/shop", dropdown: false },
+    { label: 'About Us', path: '/about' },
+    { label: 'Careers', path: '/careers' },
+    { label: 'Contact', path: '/contact' },
+    { label: 'Blog', path: '/blog' },
   ];
 
   return (
-    <nav className="absolute w-full top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-black"
-        >
-          Websquad
-        </motion.div>
+    <nav
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isHomePage
+          ? isScrolled
+            ? 'bg-white'
+            : 'backdrop-blur-sm bg-transparent text-white'
+          : 'bg-white text-gray-700'
+      }`}
+    >
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
+          <Logo size={isScrolled ? '2xl' : '2xl'} />
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex items-center gap-6">
-          {menuItems.map((item, index) => (
-            <li
-              key={item.label}
-              className="relative group"
-              onMouseEnter={() => item.dropdown && toggleDropdown(index)}
-              onMouseLeave={() => item.dropdown && setActiveDropdown(null)}
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-1">
+            {menuItems.map((item) =>
+              item.dropdown ? (
+                <Dropdown key={item.label} label={item.label} items={item.items} />
+              ) : (
+                <NavLink key={item.label} to={item.path}>
+                  {item.label}
+                </NavLink>
+              )
+            )}
+          </div>
+
+          {/* Search Bar */}
+          <div className="hidden md:flex items-center ml-4">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search..."
+                className={`pl-8 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 transition-all duration-300 ${
+                  isHomePage
+                    ? isScrolled
+                      ? 'bg-gray-200 focus:ring-primary text-gray-700'
+                      : 'bg-transparent focus:ring-white text-white'
+                    : 'bg-gray-200 focus:ring-primary text-gray-700'
+                }`}
+              />
+              <Search
+                className={`absolute left-2 top-1/2 transform -translate-y-1/2 transition-all duration-300 ${
+                  isHomePage
+                    ? isScrolled
+                      ? 'text-gray-500'
+                      : 'text-white'
+                    : 'text-gray-500'
+                }`}
+                size={18}
+              />
+            </div>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-gray-700 hover:text-blue-600 focus:outline-none"
             >
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  `flex items-center text-lg font-medium transition duration-300 ${
-                    isActive ? "text-gray-600" : "text-gray-700 hover:text-gray-500"
-                  } ${item.dropdown ? "pr-2" : ""}`}
-              >
-                {item.label}
-                {item.dropdown && (
-                  <ChevronDown
-                    className={`ml-1 w-4 h-4 transition-transform ${
-                      activeDropdown === index ? "rotate-180" : ""
-                    }`}
-                  />
-                )}
-              </NavLink>
-              {item.dropdown && activeDropdown === index && (
-                <div className="absolute left-0 mt-2 bg-white shadow-lg rounded-md w-48">
-                  {item.subItems.map((subItem) => (
-                    <NavLink
-                      key={subItem.label}
-                      to={subItem.path}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      {subItem.label}
-                    </NavLink>
-                  ))}
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            onClick={toggleMobileMenu}
-            className="text-gray-700 hover:text-purple-500"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              className="absolute top-full left-0 w-full bg-white shadow-md z-50"
-              variants={mobileMenuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-            >
-              <motion.ul className="flex flex-col py-4">
-                {menuItems.map((item, index) => (
-                  <motion.li
-                    key={item.label}
-                    custom={index}
-                    variants={menuItemVariants}
-                    className="border-b last:border-b-0 border-gray-100"
-                  >
-                    <div
-                      className="flex justify-between items-center px-4 py-3"
-                      onClick={() => item.dropdown && toggleDropdown(index)}
-                    >
-                      <NavLink
-                        to={item.path}
-                        className={({ isActive }) =>
-                          `text-lg font-medium ${
-                            isActive
-                              ? "text-purple-600"
-                              : "text-gray-700 hover:text-purple-500"
-                          }`
-                        }
-                        onClick={() => !item.dropdown && setMobileMenuOpen(false)}
-                      >
-                        {item.label}
-                      </NavLink>
-                      {item.dropdown && (
-                        <ChevronDown
-                          size={20}
-                          className={`transition-transform ${
-                            activeDropdown === index ? "rotate-180" : ""
-                          }`}
-                        />
-                      )}
-                    </div>
-                    {item.dropdown && activeDropdown === index && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        className="bg-gray-50"
-                      >
-                        {item.subItems.map((subItem) => (
-                          <NavLink
-                            key={subItem.label}
-                            to={subItem.path}
-                            className={({ isActive }) =>
-                              `block px-6 py-2 text-sm ${
-                                isActive
-                                  ? "bg-purple-50 text-purple-600"
-                                  : "text-gray-700 hover:bg-gray-100"
-                              }`
-                            }
-                            onClick={() => setMobileMenuOpen(false)}
-                          >
-                            {subItem.label}
-                          </NavLink>
-                        ))}
-                      </motion.div>
-                    )}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="flex flex-col py-2">
+              {menuItems.map((item) =>
+                item.dropdown ? (
+                  <Dropdown key={item.label} label={item.label} items={item.items} />
+                ) : (
+                  <NavLink key={item.label} to={item.path}>
+                    {item.label}
+                  </NavLink>
+                )
+              )}
+              <div className="px-4 py-2">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className={`w-full pl-8 pr-4 py-2 rounded-full focus:outline-none focus:ring-2 transition-all duration-300 ${
+                    isHomePage
+                      ? isScrolled
+                        ? 'bg-gray-200 focus:ring-blue-400 text-gray-700'
+                        : 'bg-transparent focus:ring-white text-white'
+                      : 'bg-gray-200 focus:ring-blue-400 text-gray-700'
+                  }`}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

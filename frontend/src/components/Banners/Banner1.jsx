@@ -36,7 +36,7 @@ const Banner1 = () => {
         backgroundPosition: 'center'
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black to-primary opacity-70"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary via-black to-primary opacity-70"></div>
       
       <motion.div 
         initial="hidden"

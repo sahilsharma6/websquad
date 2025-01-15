@@ -14,7 +14,7 @@ const WaveBackground = ({color1, color2}) => {
     if (wave1 && wave2) {
       // Animate wave1
       gsap.to(wave1, {
-        x: '-50%',
+        x: '-70%',
         repeat: -1,
         duration: 20,
         ease: 'linear',
@@ -45,7 +45,7 @@ const WaveBackground = ({color1, color2}) => {
       preserveAspectRatio="xMinYMin slice"
     >
       <defs>
-        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="bgGradient" x1="10%" y1="0%" x2="100%" y2="50%">
           <stop offset="0%" stopColor={color1} />
           <stop offset="100%" stopColor={color2} />
         </linearGradient>
@@ -62,9 +62,9 @@ const WaveBackground = ({color1, color2}) => {
         />
       </defs>
       <use href="#wave1" x="0" y="0" />
-      <use href="#wave1" x="2880" y="0" />
-      <use href="#wave2" x="0" y="0" />
-      <use href="#wave2" x="2880" y="0" />
+      <use href="#wave1" x="28080" y="0" />
+      {/* <use href="#wave2" x="0" y="0" /> */}
+      {/* <use href="#wave2" x="2880" y="0" /> */}
     </svg>
   );
 };

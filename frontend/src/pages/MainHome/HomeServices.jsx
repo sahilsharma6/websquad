@@ -1,142 +1,146 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { FaStar, FaArrowRight } from "react-icons/fa6";
+import { ArrowRight, Palette, Smartphone, Users, Building, TrendingUp, Briefcase } from 'lucide-react';
 
 const services = [
   {
     title: "Graphic Design",
     description: "Transform your brand with visually stunning and strategic design solutions that captivate and communicate.",
-    icon: "🎨",
-    color: "from-gray-700 to-gray-900"
+    icon: Palette,
+    color: "from-pink-500 to-rose-500"
   },
   {
     title: "Digital Products",
     description: "Innovative digital experiences that blend cutting-edge technology with intuitive user interfaces.",
-    icon: "✨",
-    color: "from-gray-600 to-gray-800"
+    icon: Smartphone,
+    color: "from-blue-500 to-indigo-500"
   },
   {
     title: "Social Marketing",
     description: "Amplify your brand's voice and connect with your audience through data-driven social media strategies.",
-    icon: "🧑‍🤝‍🧑",
-    color: "from-gray-500 to-gray-700"
+    icon: Users,
+    color: "from-green-500 to-teal-500"
   },
   {
     title: "Brand Strategy",
     description: "Craft a compelling brand narrative that resonates with your target audience and drives business growth.",
-    icon: "🏛️",
-    color: "from-gray-600 to-gray-800"
+    icon: Building,
+    color: "from-yellow-500 to-amber-500"
   },
   {
     title: "Product Development",
     description: "Turn innovative ideas into scalable digital solutions with our comprehensive product development approach.",
-    icon: "📈",
-    color: "from-gray-500 to-gray-700"
+    icon: TrendingUp,
+    color: "from-purple-500 to-violet-500"
   },
   {
     title: "Consulting",
     description: "Strategic insights and expert guidance to navigate complex business challenges and unlock potential.",
-    icon: "🔵",
-    color: "from-gray-600 to-gray-900"
+    icon: Briefcase,
+    color: "from-cyan-500 to-sky-500"
   },
 ];
 
-const ServiceCard = ({ title, description, icon, color, index }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const yValue = index % 2 === 0 ? -50 : 50;
-
+const ServiceCard = ({ title, description, icon: Icon, color, index }) => {
   return (
     <motion.div
-      whileInView={{ y: 0, opacity: 1 }}
-      initial={{ y: yValue, opacity: 0 }}
-      transition={{ 
-        duration: 0.6, 
-        ease: "easeOut",
-        delay: index * 0.1
-      }}
-      className="flex justify-center"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group perspective"
     >
       <motion.div
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
-        whileHover={{ scale: 1.05 }}
-        className="relative w-full max-w-sm bg-gray-800 shadow-2xl rounded-2xl overflow-hidden group"
+        whileHover={{ rotateY: 10, rotateX: -10, scale: 1.05 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className={`relative overflow-hidden rounded-2xl border border-secondary shadow-lg transition-all duration-300 group-hover:shadow-2xl`}
       >
-        {/* Gradient Background */}
-        <div 
-          className={`absolute inset-0 bg-gradient-to-br ${color} opacity-10 group-hover:opacity-20 transition-all duration-300`}
-        />
-
-        <div className="p-6 relative z-10">
+        <div className={`absolute inset-0 ${color} opacity-80`} />
+        <div className="relative p-6 z-10">
           <motion.div
-            animate={{ 
-              rotate: isHovered ? [0, 10, -10, 0] : 0,
-              scale: isHovered ? 1.1 : 1
-            }}
-            transition={{ duration: 0.3 }}
-            className="text-6xl mb-4 text-center text-gray-300"
+            initial={{ scale: 0.5, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 300, damping: 20 }}
+            className={`mb-6 w-16 h-16 rounded-full bg-gradient-to-r  flex items-center justify-center`}
           >
-            {icon}
+            <Icon size={32} className="text-gray-800" />
           </motion.div>
-
-          <h3 className="text-2xl font-bold mb-3 text-gray-200 text-center">
+          <h3 className="text-2xl font-bold mb-3 text-navlinks">
             {title}
           </h3>
-
-          <p className="text-gray-400 mb-6 text-center min-h-[100px] line-clamp-4">
+          <p className="text-secondary/60 mb-6 line-clamp-3">
             {description}
           </p>
-
-          {/* Updated Button */}
           <motion.button
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, x: 5 }}
             whileTap={{ scale: 0.95 }}
-            className={`w-full py-3 rounded-lg font-semibold 
-              text-gray-800 bg-white 
-              border border-gray-300 
-              flex items-center justify-center 
-              space-x-2 
-              shadow-lg hover:shadow-xl 
-              transition-all duration-300`}
+            className="flex items-center space-x-2 text-navlinks font-semibold group"
           >
-            <span>Learn More</span>
-            <FaArrowRight className="ml-2 text-gray-800" />
+            <span className="border-b-2 border-transparent group-hover:border-white transition-all duration-300">Learn More</span>
+            <ArrowRight size={20} className="transform group-hover:translate-x-1 transition-transform duration-300" />
           </motion.button>
         </div>
+        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/30 to-transparent" />
       </motion.div>
     </motion.div>
   );
 };
 
-
 const HomeServices = () => {
   return (
-    <div className="bg-gray-900 py-16 px-4">
-      <motion.div 
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="container mx-auto text-center mb-12"
-      >
-        <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-gray-400 mb-4">
-          Our Services
-        </h2>
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-          Empowering businesses through innovative solutions, strategic insights, and transformative digital experiences.
-        </p>
-      </motion.div>
+    <div className="bg-gradient-to-b from-primary/90 to-primary/40 min-h-screen py-20 px-4 relative overflow-hidden">
+      {/* Background animated shapes */}
+      {/* {[...Array(5)].map((_, index) => (
+        <motion.div
+          key={index}
+          className="absolute rounded-full mix-blend-multiply filter blur-3xl opacity-30"
+          style={{
+            background: `radial-gradient(circle, ${index % 2 === 0 ? 'rgba(236, 72, 153, 0.3)' : 'rgba(59, 130, 246, 0.3)'} 0%, transparent 70%)`,
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            width: `${Math.random() * 600 + 200}px`,
+            height: `${Math.random() * 600 + 200}px`,
+          }}
+          animate={{
+            x: [0, Math.random() * 100 - 50],
+            y: [0, Math.random() * 100 - 50],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
+      ))} */}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-        {services.map((service, index) => (
-          <ServiceCard
-            key={index}
-            {...service}
-            index={index}
-          />
-        ))}
+      <div className="container mx-auto relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl font-extrabold mb-6 text-gray-800 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+            Our Services
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Empowering businesses through innovative solutions, strategic insights, and transformative digital experiences.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <ServiceCard
+              key={index}
+              {...service}
+              index={index}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
 export default HomeServices;
+

@@ -28,9 +28,9 @@ const AuthLayout = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full md:w-1/2 flex flex-col items-center justify-center p-8"
+        className="w-full md:w-1/2 flex flex-col items-center justify-center"
       >
-        <div className="w-full max-w-md">
+        <div className="w-full">
           <AnimatePresence mode="wait">
             {isLogin ? (
               <motion.div
@@ -55,14 +55,6 @@ const AuthLayout = () => {
             )}
           </AnimatePresence>
         </div>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={toggleDarkMode}
-          className="mt-8 p-2 rounded-full bg-opacity-20 backdrop-blur-lg"
-        >
-          {isDarkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
-        </motion.button>
       </motion.div>
     </div>
   );

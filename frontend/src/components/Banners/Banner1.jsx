@@ -29,14 +29,14 @@ const Banner1 = () => {
 
   return (
     <div 
-      className="relative min-h-[50vh] bg-black bg-opacity-90 flex items-center justify-center overflow-hidden"
+      className="relative min-h-[60vh] bg-black bg-opacity-90 flex items-center justify-center overflow-hidden"
       style={{
         backgroundImage: 'url("/path/to/your/texture-or-pattern.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-secondary via-black to-primary opacity-70"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary to-primary opacity-70"></div>
       
       <motion.div 
         initial="hidden"

@@ -197,6 +197,13 @@ const HomeTeams = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 3000); // Change slide every 3 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   const handleNext = () => {
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % teamMembers.length);
@@ -412,3 +419,4 @@ const HomeTeams = () => {
 };
 
 export default HomeTeams;
+

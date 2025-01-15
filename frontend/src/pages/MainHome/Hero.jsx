@@ -8,40 +8,40 @@ const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <div className="relative min-h-screen bg-secondary flex items-center justify-center overflow-hidden pt-20">
+    <div className="relative min-h-screen bg-gradient-to-b from-secondary via-secondary to-secondary/90 flex items-center justify-center overflow-hidden pt-20">
       {/* Animated Background */}
       <div className="absolute inset-0">
-        <motion.div 
+        <motion.div
           className="absolute inset-0 opacity-20"
-          animate={{ 
+          animate={{
             background: [
-              "radial-gradient(circle at 0% 0%, #4f46e5 0%, transparent 50%)",
-              "radial-gradient(circle at 100% 100%, #4f46e5 0%, transparent 50%)",
-              "radial-gradient(circle at 0% 100%, #4f46e5 0%, transparent 50%)",
-              "radial-gradient(circle at 100% 0%, #4f46e5 0%, transparent 50%)",
-              "radial-gradient(circle at 0% 0%, #4f46e5 0%, transparent 50%)",
+              "radial-gradient(circle at 0% 0%, #a8b3ab 0%, transparent 50%)",
+              "radial-gradient(circle at 100% 100%, #a8b3ab 0%, transparent 50%)",
+              "radial-gradient(circle at 0% 100%, #a8b3ab 0%, transparent 50%)",
+              "radial-gradient(circle at 100% 0%, #a8b3ab 0%, transparent 50%)",
+              "radial-gradient(circle at 0% 0%, #a8b3ab 0%, transparent 50%)",
             ]
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
         />
-        
+
         {/* Floating Elements */}
         <div className="absolute inset-0">
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute w-2 h-2 bg-white rounded-full"
-              initial={{ 
+              initial={{
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
                 scale: 0
               }}
-              animate={{ 
+              animate={{
                 y: [null, -20, 20],
                 scale: [0, 1, 0],
                 opacity: [0, 0.5, 0]
               }}
-              transition={{ 
+              transition={{
                 duration: 3 + Math.random() * 2,
                 repeat: Infinity,
                 delay: Math.random() * 2
@@ -67,8 +67,8 @@ const Hero = () => {
           >
             <motion.span
               className="absolute -inset-1 bg-gradient-to-r from-primary to-navlinks blur opacity-30"
-              // animate={{ opacity: [0.3, 0.6, 0.3] }}
-              // transition={{ duration: 2, repeat: Infinity }}
+            // animate={{ opacity: [0.3, 0.6, 0.3] }}
+            // transition={{ duration: 2, repeat: Infinity }}
             />
             <h2 className="relative text-lg font-medium text-primary">
               Welcome to Web Squad.
@@ -94,12 +94,12 @@ const Hero = () => {
               transition={{ delay: 0.6 }}
               className="text-lg text-gray-300 max-w-xl mx-auto lg:mx-0"
             >
-              Transform your digital presence with cutting-edge web solutions that combine 
+              Transform your digital presence with cutting-edge web solutions that combine
               stunning design with powerful functionality.
             </motion.p>
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
@@ -147,11 +147,11 @@ const Hero = () => {
             {/* Main Circle */}
             <motion.div
               className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-navlinks"
-              animate={{ 
+              animate={{
                 rotate: 360,
                 scale: [1, 1.05, 1]
               }}
-              transition={{ 
+              transition={{
                 rotate: { duration: 20, repeat: Infinity, ease: "linear" },
                 scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
               }}
@@ -187,7 +187,7 @@ const Hero = () => {
       {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ 
+        animate={{
           opacity: [0, 1, 0],
           y: [0, 10, 0]
         }}

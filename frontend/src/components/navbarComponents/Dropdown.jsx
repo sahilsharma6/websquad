@@ -79,7 +79,7 @@ const EnhancedDropdown = ({ label, items }) => {
         {isOpen && (
           <motion.div
             className={`absolute top-full left-0 mt-2 w-96 rounded-lg shadow-xl border border-gray-200 overflow-hidden z-10 ${
-              isScrolled || !isHomePage ? 'bg-white' : 'bg-transparent'
+              isScrolled || !isHomePage ? 'bg-white' : 'backdrop-blur-3xl'
             }`}
             variants={dropdownVariants}
             initial="hidden"

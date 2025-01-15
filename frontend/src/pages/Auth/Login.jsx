@@ -1,17 +1,29 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Lock, Eye, EyeOff, LogIn } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false)
+  const [selectedRole, setSelectedRole] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!selectedRole) return;
+
+    login(selectedRole);
+    navigate(`/dashboard/${selectedRole}`);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         type: 'spring',
         damping: 20,
         stiffness: 100
@@ -30,14 +42,14 @@ export default function LoginForm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-primary">
-      <motion.div 
+      <motion.div
         className="w-full max-w-lg"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <div className="bg-white shadow-2xl rounded-3xl px-8 pt-8 pb-10 relative overflow-hidden">
-          <motion.div 
+          <motion.div
             className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary to-navlinks"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
@@ -52,7 +64,7 @@ export default function LoginForm() {
             >
               <LogIn className="w-10 h-10 text-white" />
             </motion.div>
-            <motion.h2 
+            <motion.h2
               className="text-3xl font-bold text-gray-800"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -60,7 +72,7 @@ export default function LoginForm() {
             >
               Welcome Back
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-gray-500 mt-2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -70,6 +82,17 @@ export default function LoginForm() {
             </motion.p>
           </div>
           <form className="space-y-6">
+            <select
+              value={selectedRole}
+              onChange={(e) => setSelectedRole(e.target.value)}
+              className="mt-1 block w-full p-2 border rounded-md"
+              required
+            >
+              <option value="">Select a role</option>
+              <option value="admin">Admin</option>
+              <option value="employee">Employee</option>
+              <option value="intern">Intern</option>
+            </select>
             <motion.div className="relative" variants={inputVariants} whileFocus="focus">
               <Mail className="absolute top-3 left-3 w-5 h-5 text-gray-400" />
               <input
@@ -106,6 +129,7 @@ export default function LoginForm() {
             </div>
             <motion.button
               type="submit"
+              onClick={handleLogin}
               className="w-full py-3 px-4 bg-gradient-to-r from-primary to-navlinks text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-primfrom-primary focus:ring-opacity-50 transition"
               variants={buttonVariants}
               whileHover="hover"
@@ -114,7 +138,7 @@ export default function LoginForm() {
               Sign In
             </motion.button>
           </form>
-          <motion.div 
+          <motion.div
             className="mt-8 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

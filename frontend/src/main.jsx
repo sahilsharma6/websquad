@@ -5,6 +5,7 @@ import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
 
 import App from './App.jsx'
+import { AuthProvider } from './contexts/AuthContext.jsx';
 
 import Home from './pages/Home.jsx';
 
@@ -21,6 +22,11 @@ import AuthLayout from './pages/Auth/AuthLayout.jsx';
 import Login from './pages/Auth/Login.jsx';
 import Register from './pages/Auth/Register.jsx';
 import HomeCareers from './pages/MainHome/HomeCareers.jsx';
+import PrivateRoute from './pages/Auth/compoennts/PrivateRoute.jsx';
+import AdminDashboard from './pages/DashBoards/Admin/AdminDashboard.jsx';
+import InternDashboard from './pages/DashBoards/Intern/InternDashboard.jsx';
+import EmployeeDashboard from './pages/DashBoards/Employee/EmployeeDashboard.jsx';
+import DashboardLayout from './pages/DashBoards/DashboardLayout.jsx';
 
 
 const router = createBrowserRouter([
@@ -56,7 +62,6 @@ const router = createBrowserRouter([
         path: "careers",
         element: <HomeCareers />,
       },
-
       {
         path: "portfolio",
         element: <Portfolio />,
@@ -68,7 +73,7 @@ const router = createBrowserRouter([
     element: <NotFound />
   },
   {
-    path: "/Authentication",
+    path: "Authentication",
     element: <AuthLayout />,
     children: [
       {
@@ -81,15 +86,111 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path: "dashboard",
+    element:
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>,
+    children: [
+      {
+        path: "admin",
+        element:
+          <PrivateRoute allowedRoles={['admin']}>
+            <AdminDashboard />
+          </PrivateRoute>,
+        children: [
+          {
+            path: "",
+            element: <div>Admin Overview</div>,
+          },
+          {
+            path: "users",
+            element: <div>Users</div>,
+          },
+          {
+            path: "analytics",
+            element: <div>Analytics</div>,
+          },
+          {
+            path: "settings",
+            element: <div>Settings</div>,
+          },
+          {
+            path: "reports",
+            element: <div>Reports</div>,
+          },
+        ]
+      },
+      {
+        path: "intern",
+        element:
+          <PrivateRoute allowedRoles={['intern']}>
+            <InternDashboard />
+          </PrivateRoute>,
+        children: [
+          {
+            path: "",
+            element: <div>Intern Overview</div>,
+          },
+          {
+            path: "training",
+            element: <div>Training</div>,
+          },
+          {
+            path: "timelog",
+            element: <div>Time Log</div>,
+          },
+          {
+            path: "resources",
+            element: <div>Resources</div>,
+          },
+          {
+            path: "mentorship",
+            element: <div>Mentorship</div>,
+          },
+        ]
+      },
+      {
+        path: "employee",
+        element:
+          <PrivateRoute allowedRoles={['employee']}>
+            <EmployeeDashboard />
+          </PrivateRoute>,
+        children: [
+          {
+            path: "",
+            element: <div>Employee Overview</div>,
+          },
+          {
+            path: "tasks",
+            element: <div>Tasks</div>,
+          },
+          {
+            path: "schedule",
+            element: <div>Schedule</div>,
+          },
+          {
+            path: "messages",
+            element: <div>Messages</div>,
+          },
+          {
+            path: "reports",
+            element: <div>Reports</div>,
+          },
+        ]
+      },
+    ]
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <AuthProvider> */}
-    <AnimatePresence mode="wait">
-      <RouterProvider router={router} />
-    </AnimatePresence>
+    <AuthProvider>
+      <AnimatePresence mode="wait">
+        <RouterProvider router={router} />
+      </AnimatePresence>
       {/* <Toaster /> */}
-    {/* </AuthProvider> */}
+    </AuthProvider>
   </StrictMode>
 )

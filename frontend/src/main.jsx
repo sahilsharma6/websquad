@@ -27,6 +27,10 @@ import AdminDashboard from './pages/DashBoards/Admin/AdminDashboard.jsx';
 import InternDashboard from './pages/DashBoards/Intern/InternDashboard.jsx';
 import EmployeeDashboard from './pages/DashBoards/Employee/EmployeeDashboard.jsx';
 import DashboardLayout from './pages/DashBoards/DashboardLayout.jsx';
+import AdminDashboardContent from './pages/DashBoards/Admin/pages/AdminDashboardContent.jsx';
+import EmployeeDashboardContent from './pages/DashBoards/Employee/pages/EmployeeDashboardContent';
+import InternDashboardContent from './pages/DashBoards/Intern/pages/InternDashboardContent';
+import ProfilePage from './pages/DashBoards/components/ProfilePage';
 
 
 const router = createBrowserRouter([
@@ -88,100 +92,183 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element:
+    element: (
       <PrivateRoute>
         <DashboardLayout />
-      </PrivateRoute>,
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "admin",
-        element:
+        element: (
           <PrivateRoute allowedRoles={['admin']}>
             <AdminDashboard />
-          </PrivateRoute>,
+          </PrivateRoute>
+        ),
         children: [
           {
             path: "",
-            element: <div>Admin Overview</div>,
+            element: <AdminDashboardContent />
           },
           {
             path: "users",
-            element: <div>Users</div>,
+            children: [
+              {
+                path: "employees",
+                element: <div>Manage Employees</div>
+              },
+              {
+                path: "interns",
+                element: <div>Manage Interns</div>
+              },
+              {
+                path: "regular",
+                element: <div>Manage Regular Users</div>
+              },
+              {
+                path: "add",
+                children: [
+                  {
+                    path: "employee",
+                    element: <div>Add Employee Form</div>
+                  },
+                  {
+                    path: "intern",
+                    element: <div>Add Intern Form</div>
+                  }
+                ]
+              }
+            ]
           },
           {
             path: "analytics",
-            element: <div>Analytics</div>,
+            children: [
+              {
+                path: "performance",
+                element: <div>Performance Analytics</div>
+              },
+              {
+                path: "usage",
+                element: <div>Usage Analytics</div>
+              }
+            ]
           },
           {
             path: "settings",
-            element: <div>Settings</div>,
+            element: <div>Settings</div>
           },
           {
             path: "reports",
-            element: <div>Reports</div>,
+            children: [
+              {
+                path: "monthly",
+                element: <div>Monthly Reports</div>
+              },
+              {
+                path: "annual",
+                element: <div>Annual Reports</div>
+              }
+            ]
           },
-        ]
-      },
-      {
-        path: "intern",
-        element:
-          <PrivateRoute allowedRoles={['intern']}>
-            <InternDashboard />
-          </PrivateRoute>,
-        children: [
-          {
-            path: "",
-            element: <div>Intern Overview</div>,
-          },
-          {
-            path: "training",
-            element: <div>Training</div>,
-          },
-          {
-            path: "timelog",
-            element: <div>Time Log</div>,
-          },
-          {
-            path: "resources",
-            element: <div>Resources</div>,
-          },
-          {
-            path: "mentorship",
-            element: <div>Mentorship</div>,
-          },
+          { 
+            path: "myprofile",
+            element: <ProfilePage />
+          }
         ]
       },
       {
         path: "employee",
-        element:
+        element: (
           <PrivateRoute allowedRoles={['employee']}>
             <EmployeeDashboard />
-          </PrivateRoute>,
+          </PrivateRoute>
+        ),
         children: [
           {
             path: "",
-            element: <div>Employee Overview</div>,
+            element: <EmployeeDashboardContent />
           },
           {
             path: "tasks",
-            element: <div>Tasks</div>,
+            children: [
+              {
+                path: "active",
+                element: <div>Active Tasks</div>
+              },
+              {
+                path: "completed",
+                element: <div>Completed Tasks</div>
+              }
+            ]
           },
           {
             path: "schedule",
-            element: <div>Schedule</div>,
+            element: <div>Schedule</div>
           },
           {
             path: "messages",
-            element: <div>Messages</div>,
+            children: [
+              {
+                path: "inbox",
+                element: <div>Inbox</div>
+              },
+              {
+                path: "sent",
+                element: <div>Sent Messages</div>
+              }
+            ]
           },
-          {
-            path: "reports",
-            element: <div>Reports</div>,
-          },
+          { 
+            path: "myprofile",
+            element: <ProfilePage />
+          }
         ]
       },
+      {
+        path: "intern",
+        element: (
+          <PrivateRoute allowedRoles={['intern']}>
+            <InternDashboard />
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            path: "",
+            element: <InternDashboardContent />
+          },
+          {
+            path: "training",
+            children: [
+              {
+                path: "courses",
+                element: <div>Training Courses</div>
+              },
+              {
+                path: "assignments",
+                element: <div>Training Assignments</div>
+              }
+            ]
+          },
+          {
+            path: "timelog",
+            element: <div>Time Log</div>
+          },
+          {
+            path: "resources",
+            element: <div>Resources</div>
+          },
+          {
+            path: "mentorship",
+            element: <h1>mentorship</h1>
+          },
+          { 
+            path: "myprofile",
+            element: <ProfilePage />
+          }
+        ]
+      }
     ]
-  },
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(

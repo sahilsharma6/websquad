@@ -35,9 +35,6 @@ const AuthLayout = () => {
             {isLogin ? (
               <motion.div
                 key="login"
-                initial={{ x: 300, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -300, opacity: 0 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 20 }}
               >
                 <Login isDarkMode={isDarkMode} />
@@ -45,9 +42,6 @@ const AuthLayout = () => {
             ) : (
               <motion.div
                 key="register"
-                initial={{ x: 300, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -300, opacity: 0 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 20 }}
               >
                 <Register isDarkMode={isDarkMode} />
